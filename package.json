@@ -26,9 +26,11 @@
   },
   "dependencies": {
     "chai": "^3.4.1",
+    "cron": "^1.2.1",
     "hexo-migrator-rss": "git+https://github.com/grevory/hexo-migrator-rss.git",
     "hexo-util": "^0.6.0",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "moment": "^2.17.1"
   },
   "scripts": {
     "test": "mocha test"
