@@ -1,0 +1,36 @@
+{
+  "name": "hexo-rss-importer",
+  "version": "0.0.0",
+  "description": "Regularly scan for new articles from syndications and import them into your blog",
+  "main": "index",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grevory/hexo-rss-importer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/grevory/hexo-rss-importer/issues"
+  },
+  "keywords": [
+    "hexo",
+    "rss",
+    "feed",
+    "atom",
+    "import",
+    "syndications",
+    "cron"
+  ],
+  "author": "Gregory Pike <greg@gregpike.ca>",
+  "license": {
+    "type": "MIT",
+    "url": "https://raw.github.com/grevory/hexo-rss-importer/master/LICENSE"
+  },
+  "dependencies": {
+    "chai": "^3.4.1",
+    "hexo-migrator-rss": "git+https://github.com/grevory/hexo-migrator-rss.git",
+    "hexo-util": "^0.6.0",
+    "mocha": "^3.2.0"
+  },
+  "scripts": {
+    "test": "mocha test"
+  }
+}
