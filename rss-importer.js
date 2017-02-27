@@ -1,4 +1,4 @@
-const rssMigrator = require('hexo-migrator-rss');
+// const rssMigrator = require('hexo-migrator-rss');
 
 exports.start = function (hexo) {
 
@@ -6,4 +6,4 @@ exports.start = function (hexo) {
     console.log('Well look at that.... ');
   });
 
-}
+};
