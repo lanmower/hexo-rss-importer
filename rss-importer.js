@@ -6,6 +6,7 @@
 exports.start = function (hexo) {
 
   hexo.on('ready', function() {
+    console.log('STARTING');
     var CronJob = require('cron').CronJob;
     new CronJob('0 0,15,30,45 * * * *', function() {
       console.log('You will see this message every 15 minutes - ', moment().format('h:mmA'));
