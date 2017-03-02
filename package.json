@@ -25,7 +25,7 @@
     "url": "https://raw.github.com/grevory/hexo-rss-importer/master/LICENSE"
   },
   "dependencies": {
-    "chai": "^3.4.1",
+    "chai": "^3.5.0",
     "cron": "^1.2.1",
     "hexo-migrator-rss": "git+https://github.com/grevory/hexo-migrator-rss.git",
     "hexo-util": "^0.6.0",

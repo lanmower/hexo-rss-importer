@@ -9,7 +9,13 @@ exports.start = function (hexo) {
 
   hexo.on('ready', function() {
 
-    if (process.argv.indexOf('generate') >= 0 || process.argv.indexOf('migrate') >= 0) {
+    // Only process when running hexo server command
+    if (process.argv.indexOf('server') === -1) {
+      return;
+    }
+
+    // Config setup is required
+    if (!hexo.config || !hexo.config.rss_importer || hexo.config.rss_importer.feeds) {
       return;
     }
 
@@ -18,7 +24,7 @@ exports.start = function (hexo) {
     // Run every 15 minutes by default
     var interval = hexo.config.rss_importer.interval || 15;
 
-    new CronJob('0 */' + interval + ' * * * *', function() {
+    return new CronJob('0 */' + interval + ' * * * *', function() {
 
       console.log('You will see this message every ' + interval + ' minutes - ', moment().format('h:mmA'));
 
