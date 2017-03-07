@@ -1,10 +1,22 @@
 // Return mock hexo for unit testing.
 exports.create = function (config) {
-  var mock = {};
+  let mock = {},
+    readyCallback;
   mock.config = config;
+  mock.callbacks = {};
   mock.on = function(name, callback){
-    return callback();
+    this.callbacks[name] = callback;
   };
+  mock.triggerOn = function(eventName) {
+    let test = this.callbacks[eventName]();
+    if (readyCallback) {
+      readyCallback();
+    }
+    return test;
+  };
+  mock.isReady = function(cb) {
+    readyCallback = cb;
+  }
   mock.setValues =
   {
     registeredType: null,
