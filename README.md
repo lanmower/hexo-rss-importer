@@ -30,8 +30,12 @@ rss_importer:
       limit: 3
 ```
 ## Options
-preventDuplicates [boolean] - Without this flag the importer will import posts it has already imported
-interval [number] - Time between imports in minutes
-feeds [array] - List of feeds to be imported.
-⋅⋅⋅url [string] - The URL of the RSS feed which is to be imported. Part of each `feed`.
-⋅⋅⋅limit [number] - The number of posts to be imported at a time from this `feed`.
+`preventDuplicates` [boolean] - Without this flag the importer will import posts it has already imported
+
+`interval` [number] - Time between imports in minutes
+
+`feeds` [array] - List of feeds to be imported.
+
+   `url` [string] - The URL of the RSS feed which is to be imported. Part of each `feed`.
+
+   `limit` [number] - The number of posts to be imported at a time from this `feed`.
