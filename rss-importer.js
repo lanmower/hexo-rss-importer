@@ -1,10 +1,9 @@
 /* jshint node: true */
 'use strict';
 
-// const rssMigrator = require('hexo-migrator-rss');
 const moment = require('moment');
 
-exports.start = function (hexo) {
+exports.start = function(hexo) {
 
   hexo.on('ready', function() {
 
@@ -41,6 +40,7 @@ exports.start = function (hexo) {
       }
 
     }, null, true, 'America/Toronto');
+
     return cron;
   });
 

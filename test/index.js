@@ -1,35 +1,34 @@
+/* globals describe, context, beforeEach, it, after */
 'use strict';
 
-const should = require('chai').should,
-  expect = require('chai').expect,
-  sinon = require('sinon'),
-  sinonChai = require('sinon-chai'),
-  mockery = require('mockery'),
-  rssImporter = require('../rss-importer.js'),
-  fakehexoFactory = require('./fake-hexo-factory.js');
+const expect = require('chai').expect;
+const mockery = require('mockery');
+const rssImporter = require('../rss-importer.js');
+const fakehexoFactory = require('./fake-hexo-factory.js');
 
-let fakeHexo,
-  importer;
+let fakeHexo;
 
-describe("RSS Importer", function () {
+describe('RSS Importer', function() {
 
+  let importer = {};
   this.timeout(10000);
 
-  context("no config", function () {
+  context('no config', function() {
 
-    beforeEach(function () {
+    beforeEach(function() {
       fakeHexo = fakehexoFactory.create();
       importer = rssImporter.start(fakeHexo);
     });
 
-    it("will not start cron", function () {
+    it('will not start cron', function() {
+      /* eslint-disable no-unused-expressions */
       expect(fakeHexo.triggerOn('ready')).to.be.undefined;
     });
   });
 
-  context("no allowed script config", function () {
+  context('no allowed script config', function() {
 
-    beforeEach(function () {
+    beforeEach(function() {
       fakeHexo = fakehexoFactory.create({
         rss_importer: {
           feeds: []
@@ -38,14 +37,15 @@ describe("RSS Importer", function () {
       importer = rssImporter.start(fakeHexo);
     });
 
-    it("will not start cron", function () {
+    it('will not start cron', function() {
+      /* eslint-disable no-unused-expressions */
       expect(fakeHexo.triggerOn('ready')).to.be.undefined;
     });
   });
 
-  context("test is an allowed script config", function () {
+  context('test is an allowed script config', function() {
 
-    beforeEach(function () {
+    beforeEach(function() {
       fakeHexo = fakehexoFactory.create({
         rss_importer: {
           feeds: [],
@@ -55,51 +55,57 @@ describe("RSS Importer", function () {
       importer = rssImporter.start(fakeHexo);
     });
 
-    it("will process cron", function () {
+    it('will process cron', function() {
+      /* eslint-disable no-unused-expressions */
       expect(fakeHexo.triggerOn('ready')).to.not.be.undefined;
     });
   });
 
-  context("stub Cron & Node-CMD", function () {
+  context('stub Cron & Node-CMD', function() {
 
-    const cron = require('cron');
-    let cronStubbed = false,
-      cmdOutputs = [],
-      eventCallback;
+    let cronStubbed = false;
+    let cmdOutputs = [];
+    let eventCallback;
 
-    beforeEach(function (done) {
+    beforeEach(function(done) {
       mockery.enable();
-      var cronMock = {
-        CronJob: function (timer, callback) {
+      let cronMock = {
+        CronJob: function(timer, callback) {
           callback();
           cronStubbed = true;
         }
       };
+
       mockery.registerMock('cron', cronMock);
-      var cmdMock = {
-        run: function (string) {
+      let cmdMock = {
+        run: function(string) {
           cmdOutputs.push(string);
           return string;
         }
       };
+
       mockery.registerMock('node-cmd', cmdMock);
       fakeHexo = fakehexoFactory.create({
         rss_importer: {
-          feeds: [{
-            url: 'https://github.com/danmactough/node-feedparser/raw/master/test/feeds/rss2sample.xml',
-            limit: 1
-          }],
+          feeds: [
+            {
+              url: 'https://github.com/danmactough/node-feedparser/raw/master/test/feeds/rss2sample.xml',
+              limit: 1
+            }
+          ],
           runCommand: 'test'
         }
       });
-      fakeHexo.isReady(function(){
+
+      fakeHexo.isReady(function() {
         done();
       });
+
       rssImporter.start(fakeHexo);
       eventCallback = fakeHexo.triggerOn('ready');
     });
 
-    it("will execute migration commands", function () {
+    it('will execute migration commands', function() {
       expect(cronStubbed).to.be.true;
       expect(cmdOutputs).to.deep.equal([
         'hexo migrate rss https://github.com/danmactough/node-feedparser/raw/master/test/feeds/rss2sample.xml --limit 1 ',
@@ -107,7 +113,7 @@ describe("RSS Importer", function () {
       ]);
     });
 
-    after(function(){
+    after(function() {
       mockery.disable();
     });
   });
