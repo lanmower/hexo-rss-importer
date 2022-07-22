@@ -1,4 +1,4 @@
-# LANMOWER fixed commandline calls
+# LANMOWER calls are now series and report commandlines, creator field added
 
 # Hexo RSS Importer
 Regularly scan for new articles from syndications and import them into your blog
@@ -14,7 +14,7 @@ In order to activate Hexo RSS Importer for your blog you need to update your _co
 At the bare minimum there needs to be a list of feeds which you wish you import.
 ```yml
 rss_importer:
-  reventDuplicates: true
+  preventDuplicates: true
   feeds:
     - url: https://github.com/danmactough/node-feedparser/raw/master/test/feeds/rss2sample.xml
       limit: 1
