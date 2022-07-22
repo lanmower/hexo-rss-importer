@@ -60,8 +60,6 @@ exports.start = function(hexo) {
         await run('hexo migrate rss ' + feed.url + ' --limit ' + feed.limit + preventDuplicatesFlag+ ' ' + creatorflag)
       }
       await run('hexo generate');
-      await run('cp -r public/* ~/mutagen/client/public/');
-      await run('cd ~/mutagen/client && node uploader.js');
 
     }
     let cron = new CronJob('0 */' + interval + ' * * * *', job, null, true, 'America/Toronto');
